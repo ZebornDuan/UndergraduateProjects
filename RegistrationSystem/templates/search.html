@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/dist/js/bootstrapValidator.js"></script>
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/custom-styles.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/success/"><i class="fa fa-user-o"
+                                               style="margin-right: 20px;"></i><strong>{{ username }}</strong></a>
+        </div>
+
+        <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search"
+              style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+            </div>
+        </form>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw" {% if new == 1 %}style="color: #ff5555"{% endif %}></i> <i
+                        class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    {% if new == 1 %}
+                        <li>
+                            <a href="/person/">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i>新消息
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="/person/">
+                            <strong>查看所有消息</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+
+                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="/success/" style="font-size: 20px;"><i class="fa fa-user-circle"
+                                                                    style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                </li>
+                <li>
+                    <a href="/nine/" style="font-size: 20px;"><i class="fa fa-flag"
+                                                                 style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                </li>
+                <li>
+                    <a href="/index" style="font-size: 20px;"><i class="fa fa-send"
+                                                                                     style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                </li>
+                <li>
+                    <a href="/index/hall_of_fame" style="font-size: 20px;"><i class="fa fa-qrcode"
+                                                           style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                </li>
+
+                <li>
+                        <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                    </li>
+
+                    <li>
+                        <a href="/person/" style="font-size: 20px;"><i class="fa fa-table"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>个人风采</a>
+                    </li>
+                {% if priority != '3' %}
+                    <li>
+                        <a href="/setting/" style="font-size: 20px;"><i class="fa fa-edit"
+                                                                        style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                    </li>
+
+                {% endif %}
+
+                {% if priority == '1' %}
+                    <li>
+                        <a href="/priority/" style="font-size: 20px;"><i class="fa fa-fw fa-file"
+                                                                         style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" style="margin-top: 60px;">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    搜索结果
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group" id="accordion">
+                                        {% for match in matches %}
+                                            <div class="panel panel-default" id="match-panel{{ match.No }}">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapse{{ match.No }}" class="collapsed"
+                                                           id="name{{ match.No }}">{{ match.name }}</a>
+                                                        {% if priority != '3' %}
+                                                        <a
+                                                            class="btn btn-danger delete-btn"
+                                                            style="float: right; padding: 0 5px; color: #fff;"
+                                                            id="delete{{ match.No }}">删除</a>
+                                                        <a class="btn btn-success csv-btn" id="csv{{ match.No }}" 
+                                                           style="float: right; padding: 0 5px; color: #fff;margin-right: 5px;">导出文件</a>
+                                                        {% endif %}
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse{{ match.No }}" class="panel-collapse collapse"
+                                                     style="height: 0px;">
+                                                    <div class="panel-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>名称</th>
+                                                                <th>时间</th>
+                                                                <th>地点</th>
+                                                                <th>赛制</th>
+                                                                <th>报名截止</th>
+                                                                <th>人(组)数限制</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>{{ match.name }}</td>
+                                                                <td>{{ match.date }}</td>
+                                                                <td>{{ match.address }}</td>
+                                                                <td>{{ match.team }}</td>
+                                                                <td id="deadline{{ match.No }}">{{ match.deadline }}</td>
+                                                                <td id="limit{{ match.No }}">{{ match.limit }}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="panel panel-warning">
+                                                                <div class="panel-heading">
+                                                                    赛事描述
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <p>{{ match.description }}</p>
+                                                                </div>
+                                                                <div class="panel-footer">
+                                                                    {% if match.team == '个人' %}
+                                                                        {% if match.cancel == '1' %}
+                                                                            <a class="btn btn-danger submit-btn"
+                                                                           id="submit{{ match.No }}">取消报名</a>
+                                                                        {% else %}
+                                                                            <a class="btn btn-success submit-btn"
+                                                                           id="submit{{ match.No }}">我要报名</a>
+                                                                        {% endif %}
+                                                                    {% else %}
+                                                                        {% if match.cancel == '2' %}
+                                                                        <a class="btn btn-danger add-team"
+                                                                           id="submit{{ match.No }}">取消报名</a>
+                                                                        {% else %}
+                                                                            <a class="btn btn-success add-team"
+                                                                           id="submit{{ match.No }}">我要报名</a>
+                                                                            <input type="hidden" id="size{{ match.No }}"
+                                                                               value="{{ match.size }}">
+                                                                        {% endif %}
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    已报名<span
+                                                                        id="number{{ match.No }}">{{ match.number }}</span>人/组
+                                                                    {% if priority != '3' %}
+                                                                        <a class="btn btn-warning check-btn"
+                                                                       id="check{{ match.No }}"
+                                                                       style="float: right; padding: 0 5px;">添加成绩</a>
+                                                                    <a class="btn btn-primary check-btn"
+                                                                       id="check{{ match.No }}"
+                                                                       style="float: right; padding: 0 5px; margin-right: 5px;">人员审核</a>
+                                                                    <a class="btn btn-default send-btn"
+                                                                       id="send{{ match.No }}"
+                                                                       style="float: right; padding: 0 5px; margin-right: 5px;">编辑邮件</a>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="panel-body">
+
+
+                                                                    {% if match.team == '个人' %}
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>姓名</th>
+                                                                                    <th>班级</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                {% for person in match.people %}
+                                                                                    <tr>
+                                                                                        <td>{{ person.no }}</td>
+                                                                                        <td>{{ person.name }}</td>
+                                                                                        <td>{{ person.class }}</td>
+                                                                                    </tr>
+                                                                                {% endfor %}
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    {% else %}
+                                                                        <div class="panel-group"
+                                                                             id="myaccordion">
+                                                                            {% for team in match.group %}
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading">
+                                                                                        <h4 class="panel-title">
+                                                                                            <a data-toggle="collapse"
+                                                                                               data-parent="#myaccordion"
+                                                                                               href="#mycollapse{{ team.no }}"
+                                                                                               class="collapsed">{{ team.name }}({{ team.leader }})</a>
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                    <div id="mycollapse{{ team.no }}"
+                                                                                         class="panel-collapse collapse"
+                                                                                         style="height: 0px;">
+                                                                                        <div class="panel-body">
+                                                                                            <table class="table table-striped table-bordered table-hover">
+                                                                                                <thead>
+                                                                                                <tr>
+                                                                                                    <th>#</th>
+                                                                                                    <th>队员</th>
+                                                                                                    <th>班级</th>
+                                                                                                </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                {% for person in team.member %}
+                                                                                                    <tr>
+                                                                                                        <td>{{ person.no }}</td>
+                                                                                                        <td>{{ person.name }}</td>
+                                                                                                        <td>{{ person.class }}</td>
+                                                                                                    </tr>
+                                                                                                {% endfor %}
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer><p><a href=""></a></p></footer>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div id="add-match" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">添加赛事</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="defaultForm" class="form-horizontal" style="margin-top: 10px;">
+                            <form id="defaultForm" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>赛事名称</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="mname"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>地点</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="maddress"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>赛制</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" id="team" onchange="Javascript:isTeam(this);">
+                                            <option>个人</option>
+                                            <option>团体</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" style="display: none;" id="teamDiv">
+                                    <label class="col-lg-3 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>队伍人数限制</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="teamSize"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>人(组)数限制</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="mlimit"/>
+                                    </div>
+                                </div>
+
+                                <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                <div class="form-group" style="height: 34px;">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>截止日期</label>
+                                    <div class="input-group date form_date col-lg-5" data-date=""
+                                         data-date-format="yyyy mm dd" data-link-field="dtp_input1"
+                                         data-link-format="yyyy-mm-dd" style="padding-left: 15px;">
+                                        <input class="form-control" size="16" type="text" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <input type="hidden" id="dtp_input1"/><br/>
+                                </div>
+
+                                <div class="form-group" style="height: 34px;">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>比赛日期</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="dtp_input2"/>
+                                    </div>
+                                </div>
+
+                                <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>赛事描述</label>
+                                    <div class="col-lg-8">
+                                        <textarea rows="3" cols="50" style="resize: none;" id="mdescription"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <input type="button" value="提交" id="add-btn"
+                                               style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                    </div>
+
+                                </div>
+                                <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-match" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">更改图片</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="file-form" method="post" class="form-horizontal" style="margin-top: 10px;"
+                              accept="/index" enctype="multipart/form-data">
+                            <form id="defaultForm" class="form-horizontal">
+                                <input type="text" name="type" value="file" style="display: none;"/>
+                                <input type="text" name="belong" value="{{ belong }}" style="display: none;"/>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">图片名称</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="title"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="file" id="picture" name="image"
+                                                   onchange="Javascript:validate_img(this, " #picture");" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">图片位置</label>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" name="which">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">图片描述</label>
+                                    <div class="col-lg-8">
+                                        <textarea rows="3" cols="50" style="resize: none;"
+                                                  name="description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <input type="button" value="提交" id="edit-btn"
+                                               style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                    </div>
+
+                                </div>
+                                <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="check-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #0000ff;" id="modal-title">人员审核</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div id="table-div">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default confirm-btn" style="padding: 5px 5px; color: #000;">确认审核</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="excil-match" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #0000ff;">导出信息</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>信息</th>
+                                    <th>确认</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="excel1">姓名</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--1">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td id="excel2">班级</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--2">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td id="excel3">学号</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--3">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td id="excel4">身份证号</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--4">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td id="excel5">性别</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--5">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>6</td>
+                                    <td id="excel6">生日</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--6">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>7</td>
+                                    <td id="excel7">攻读学位</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--7">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>8</td>
+                                    <td id="excel8">所在院系</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--8">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>9</td>
+                                    <td id="excel9">尺寸</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--9">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>10</td>
+                                    <td id="excel10">电子邮箱</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--10">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>11</td>
+                                    <td id="excel11">手机号</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--11">&nbsp</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>12</td>
+                                    <td id="excel12">所在宿舍</td>
+                                    <td><label class="checkbox-inline"><input type="checkbox" id="checkbox--12">&nbsp</label></td>
+                                </tr>
+                                               
+
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default excel-btn" style="padding: 5px 5px; color: #000;">确认导出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-news" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">添加赛事总结</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="url-form" method="post" class="form-horizontal" style="margin-top: 10px;"
+                              accept="/index" enctype="multipart/form-data">
+                            <form id="defaultForm" class="form-horizontal">
+                                <input type="text" name="type" value="url-add" style="display: none;"/>
+                                <input type="text" name="belong" value="{{ belong }}" style="display: none;"/>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">标题</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="title" id="news-title"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">类别</label>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" name="which">
+                                            <option>捷报</option>
+                                            <option>憾报</option>
+                                            <option>快讯</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">链接地址</label>
+                                    <div class="col-lg-8">
+                                        <textarea rows="3" cols="50" style="resize: none;" name="url"
+                                                  id="news-url"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <input type="button" value="提交" id="edit-url"
+                                               style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                    </div>
+
+                                </div>
+                                <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mail-motal" class="modal fade">
+    <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">编辑邮件</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="MailForm" accept="/index" method="post" class="form-horizontal"
+                              style="margin-top: 10px;">
+                            <form id="defaultForm" class="form-horizontal">
+                                <input type="text" name="type" value="send" style="display: none;"/>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>主题</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="mail-title" name="title"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>收件人</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="receiver" name="receivers"/>
+                                    </div>
+                                </div>
+
+                                <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>邮件内容</label>
+                                    <div class="col-lg-8">
+                                        <textarea id="mail-text" style="width: 100%;height: 30%;"
+                                                  name="text"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <input type="button" value="发送" id="mail-btn"
+                                               style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                    </div>
+
+                                </div>
+                                <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="team-motal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">团队报名</a></li>
+                    <li><a style="font-size: 15px; color: #000; margin-top: 5px;">注：本赛事队伍人数不超过<span class="size-comment"
+                                                                                                    style="color: #F00"></span>人</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form class="form-horizontal" style="margin-top: 10px;">
+                            <form id="defaultForm" class="form-horizontal">
+                                <input type="text" name="type" value="send" style="display: none;"/>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>队长</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" disabled="disabled" class="form-control" id="leader"
+                                               name="leader"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>队名</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="team-name"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"><span
+                                            style="color: #F00;margin-right: 2px;">*</span>添加队员</label>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="输入队员姓名或账号"
+                                                   id="member-label">
+                                            <span class="input-group-addon member-add">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label class="col-lg-2 control-label">队员</label>
+                                    <div class="col-lg-6">
+                                        <select multiple="" class="form-control multiple-list">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group hide">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <ul id="errors"></ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <input type="button" value="提交" id="team-btn"
+                                               style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                    </div>
+
+                                </div>
+                                <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery.metisMenu.js"></script>
+<script src="/static/js/custom-scripts.js"></script>
+<script src="/static/editor/kindeditor-all-min.js"></script>
+<script src="/static/editor/lang/zh-CN.js"></script>
+<!-- <script src="/static/js/app.js"></script> -->
+<script type="text/javascript">
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#mail-text');
+    });
+
+    $(".send-btn").click(function () {
+        which = $("#" + this.id.replace('send', 'name')).text();
+        $.post('', {
+            'type': 'mail',
+            'which': which,
+        }, function (data) {
+            if (data.receivers.length == 0) {
+                alert("当前没有通过审核的人员");
+                return;
+            }
+
+            $("#mail-motal").modal("show");
+            receivers = '';
+            for (var i = 0; i < data.receivers.length; i++) {
+                receivers += data.receivers[i] + ';'
+            }
+            $("#receiver").val(receivers);
+            $("#mail-btn").click(function () {
+                if ($("#mail-title").val() == '' || editor.html() == '') {
+                    alert("请输入邮件主题和内容！");
+                    return;
+                }
+                $("#mail-text").val(editor.html());
+                $("#MailForm").submit();
+                alert("发送成功！");
+                $("#mail-motal").modal("hide");
+            });
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+local = location.href;
+//to sign up a match
+$(".add-team").click(function () {
+    which = $("#" + this.id.replace('submit', 'name')).text();
+    time = "#" + this.id.replace('submit', 'deadline');
+    limit = $("#" + this.id.replace('submit', 'limit')).text();
+    number = $("#" + this.id.replace('submit', 'number')).text();
+    if ($(this).hasClass('btn-danger')) {
+        if (confirm("确定取消报名吗？")) {
+            $.post('',{
+                'type': 'cancel',
+                'which': which,
+            },function() {
+                alert("取消报名成功!");
+                location.href = local;
+            });
+        }
+        return;
+    }
+    size = $("#" + this.id.replace('submit', 'size')).val();
+    var date = new Date($(time).text());
+    var now = new Date();
+    if (date < now) {
+        alert("报名已截止");
+        return;
+    }
+    if (number >= limit) {
+        alert("本赛事名额已满");
+        return;
+    }
+    // alert($(".size-comment").html());
+    $(".size-comment").html(size);
+    $.get('', {
+        'type': 'member',
+        'which': which,
+    }, function (data) {
+        if (data.message == 'waiting') {
+            alert("您参加的队伍已经报名了该赛事，请耐心等待管理员审核！");
+            return;
+        }
+        if (data.message == 'checked') {
+            alert("您参加的队伍已成功报名该赛事，祝您好运~");
+            return;
+        }
+        $("#leader").val(data.message);
+        $("#team-motal").modal("show");
+    });
+
+    var list = new Array();
+    $(".member-add").click(function () {
+        if($("#member-label").val() == "") {
+            alert("请输入要添加的队员");
+            return;
+        }
+
+        if ($(".multiple-list").find("option").length == size) {
+            alert("队伍人数已达上限！");
+            return;
+        } else {
+            $.get('', {
+                'type': 'find',
+                'which': which,
+                'name': $("#member-label").val(),
+            }, function (data) {
+                if (data.message == 'no') {
+                    alert("查无此人");
+                    return;
+                }
+                if (data.message == 'checked') {
+                    alert("此人已加入该赛事的其他队伍");
+                    return;
+                }
+                if (($.inArray(data.message, list) != -1) || data.message == $("#leader").val()) {
+                    alert("不能重复添加");
+                } else {
+                    alert("添加队员成功");
+                    list.push(data.message);
+                    $(".multiple-list").append("<option>" + data.message +"</option>"); 
+                }
+            });
+        }
+    });
+
+    $("#team-btn").click(function () {
+        if (list.length == 0) {
+            alert("请添加队友！");
+            return;
+        }
+
+        if ($("#team-name").val() == "") {
+            alert("请为你的队伍起一个名字！");
+            return;
+        }
+
+        var info = {
+            leader: $("#leader").val(),
+            member: list,
+            name: $("#team-name").val(),
+        };
+
+        $.post('',{
+            'type': 'submit',
+            'which': which,
+            'data': JSON.stringify(info),
+        }, function (data) {
+            if (data.message == 'ok') {
+                alert("报名成功，请等待管理员审核！");
+                belong = $(".active-nav").text();
+                location.href = local;
+            }
+            if (data.message == 'name') {
+                alert("队伍名称已经被使用 请更换一个其他的队名！");
+            }
+        });
+
+    });
+});
+
+$(".submit-btn").click(function () {
+    which = $("#" + this.id.replace('submit', 'name')).text();
+    time = "#" + this.id.replace('submit', 'deadline');
+    limit = $("#" + this.id.replace('submit', 'limit')).text();
+    number = $("#" + this.id.replace('submit', 'number')).text();
+    if ($(this).hasClass('btn-danger')) {
+        if (confirm("确定取消报名吗？")) {
+            $.post('',{
+                'type': 'cancel',
+                'which': which,
+            },function() {
+                alert("取消报名成功!");
+                location.href = local;
+            });
+        }
+        return;
+    }
+    var date = new Date($(time).text());
+    var now = new Date();
+    if (date < now) {
+        alert("报名已截止");
+        return;
+    }
+    if (number >= limit) {
+        alert("本赛事名额已满");
+        return;
+    }
+
+    $.post('', {
+        'type': 'submit',
+        'which': which,
+    }, function (data) {
+        if (data.message == 'ok') {
+            alert("报名成功，请等待管理员审核！");
+            location.href = local;
+            return;
+        }
+        if (data.message == 'waiting') {
+            alert("您已经报名了该赛事，请耐心等待管理员审核！");
+            return;
+        }
+        if (data.message == 'checked') {
+            alert("您已成功报名该赛事，祝您好运~");
+        }
+    });
+});
+
+//to delete a match
+$(".delete-btn").click(function () {
+    which = $("#" + this.id.replace('delete', 'name')).text();
+    panel = "#" + this.id.replace('delete', 'match-panel');
+    if (confirm("确定要删除赛事--" + which + "吗？")) {
+        $.post('', {
+            'type': 'delete',
+            'which': which,
+        }, function (data) {
+            if (data.message == 'ok') {
+                $(panel).hide("slow");
+            }
+        });
+    }
+});
+
+//to delete news
+$(".news-del").click(function () {
+    url = $("#" + this.id.replace('news-btn', 'news')).attr("href");
+    panel = "#" + this.id.replace('news-btn', 'news-panel');
+    if (confirm("确定要该赛事总结吗？")) {
+        $.post('', {
+            'type': 'delete-news',
+            'url': url,
+            'belong': $(".active-nav").text(),
+        }, function (data) {
+            if (data.message == 'ok') {
+                $(panel).hide("slow");
+            }
+        });
+    }
+});
+
+
+$(".csv-btn").click(function() {
+
+which = $("#" + this.id.replace('csv', 'name')).text();
+$("#excil-match").modal("show");
+$(".excel-btn").click(function() {
+    var item = new Array();
+    for(var i = 1;i < 13;i++) {
+        if ($("#checkbox--" + i).is(":checked")) {
+            item.push($("#excel" + i).text());
+        }
+    }
+
+    if(item.length == 0)
+        alert("请至少选择一项！");
+    else
+        location.href = '/index?name=' + which + '&type=file&data=' + JSON.stringify(item);
+});
+
+});
+
+$(".check-btn").click(function () {
+    which = $("#" + this.id.replace('check', 'name')).text();
+    var operation = $(this).hasClass("btn-warning");
+    //return;
+    $.post('', {
+        'type': 'wait',
+        'which': which,
+        'todo': operation,
+    }, function (data) {
+        if (data.waiting.length == 0) {
+            if (operation)
+                alert("当前没有参赛人员！");
+            else
+                alert("当前没有待审核人员！");
+            return;
+        }
+        var table = "<table class=\"table table-striped table-bordered table-hover table-check\"><thead><tr><th>#</th><th>姓名</th><th>班级</th><th>确认</th><th>否认</th></tr></thead><tbody>";
+        if (data.type != 'personal')
+            table = "<table class=\"table table-striped table-bordered table-hover table-check\"><thead><tr><th>#</th><th>队名</th><th>队长</th><th>确认</th><th>否认</th></tr></thead><tbody>";
+        if (operation)
+            table = "<table class=\"table table-striped table-bordered table-hover table-check\"><thead><tr><th>#</th><th>队名&nbsp&nbsp&nbsp&nbsp&nbsp</th><th>队长&nbsp&nbsp&nbsp</th><th>成绩</th><th>名次</th></tr></thead><tbody>";
+        for (var i = 0; i < data.waiting.length; i++) {
+            table += "<tr>";
+            table += "<td>" + (i + 1) + "</td>";
+            table += "<td id=\"checkname" + i + "\">" + data.waiting[i].name + "</td>";
+            table += "<td id=\"checkclass" + i + "\">" + data.waiting[i].class_ + "</td>";
+            if (operation) {
+                table += "<td><label style=\"padding-left:0;\"  class=\"checkbox-inline\"><input type=\"text\" id=\"checkbox" + i;
+                table += "\">&nbsp</label></td>";
+                table += "<td><label style=\"padding-left:0;\"  class=\"checkbox-inline\"><input type=\"text\" id=\"refuse" + i;
+                table += "\">&nbsp</label></td></tr>";
+            } else {
+                table += "<td><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"checkbox" + i;
+                table += "\">&nbsp</label></td>";
+                table += "<td><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"refuse" + i;
+                table += "\">&nbsp</label></td></tr>"
+            }
+        }
+        table += "</tbody></table>";
+        $("#table-div").html(table);
+        if (operation) {
+            $(".confirm-btn").text("添加完成");
+            $("#modal-title").text("添加成绩");
+        } else {
+            $(".confirm-btn").text("确认审核");
+            $("#modal-title").text("人员审核");
+        }
+        $("#check-modal").modal("show");
+
+        $(".confirm-btn").click(function () {
+            number = $(".table-check").find("tr").length - 1;
+            var list = new Array();
+            var empty = false;
+            if (operation) {
+                for (var i  = 0;i < number;i++) {
+                    var grades = $("#checkbox" + i).val()
+                    var No = $("#refuse" + i).val();
+                    if (grades == "")
+                        empty = true;
+                    var temperary = {
+                        'name': $("#checkname" + i).text(),
+                        'class_': $("#checkclass" + i).text(),
+                        'grades': grades, 
+                        'No': No,
+                    }
+                    list.push(temperary);
+                }
+            } else {
+                for (var i = 0; i < number; i++) {
+                    if ($("#checkbox" + i).is(":checked")) {
+                        if ($("#refuse" + i).is(":checked")) {
+                            alert("不能同时确认和否认");
+                            return;
+                        }
+                        var temperary = {
+                            'name': $("#checkname" + i).text(),
+                            'class_': $("#checkclass" + i).text(),
+                            'type': 'check',
+                        };
+                        list.push(temperary);
+                    }
+
+                    if ($("#refuse" + i).is(":checked")) {
+                        var temperary = {
+                            'name': $("#checkname" + i).text(),
+                            'class_': $("#checkclass" + i).text(),
+                            'type': 'refuse',
+                        };
+                        list.push(temperary);
+                    }
+                }
+            }
+            if (operation) {
+                if (empty) {
+                    alert("请补全成绩信息");
+                } else {
+                    $.post('', {
+                        'type': 'grades',
+                        'which': which,
+                        'list': JSON.stringify(list),
+                    }, function(data) {
+                        alert("成绩添加完成！");
+                        $("#check-modal").modal("hide");
+                        location.href = local;
+                        return;
+                    })
+                }
+            } else {
+                if (list.length == 0)
+                    alert("请至少选择一项！");
+                else {
+                    $.post('', {
+                        'type': 'check',
+                        'which': which,
+                        'list': JSON.stringify(list),
+                    }, function (data) {
+                        alert("审核完成！");
+                        $("#check-modal").modal("hide");
+                        location.href = local;
+                        return;
+                    });
+                }
+            }
+            
+        });
+    });
+});
+
+</script>
+
+</body>
+</html>

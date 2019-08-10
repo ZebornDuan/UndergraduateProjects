@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+	<!-- Bootstrap Styles-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <!-- FontAwesome Styles-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Custom Styles-->
+    <link href="/static/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/success/"><i class="fa fa-user-o" style="margin-right: 20px;"></i><strong>{{username}}</strong></a>
+            </div>
+
+            <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search" style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+                </div>
+            </form>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i>新消息
+                                    <span class="pull-right text-muted small">一天前</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有消息</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="/success/" style="font-size: 20px;"><i class="fa fa-user-circle"
+                                                                        style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                    </li>
+                    <li>
+                        <a href="/nine/" style="font-size: 20px;"><i class="fa fa-flag"
+                                                               style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                    </li>
+                    <li>
+                        <a href="/index/" style="font-size: 20px;"><i class="fa fa-send"
+                                                                                   style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                    </li>
+                    <li>
+                        <a href="" class="active-menu" style="font-size: 20px;"><i class="fa fa-qrcode"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" 
+                                                                style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/person/" style="font-size: 20px;"><i class="fa fa-table"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>个人风采</a>
+                    </li>
+                    {% if priority != '3' %}
+                    <li>
+                        <a href="/setting/" style="font-size: 20px;"><i class="fa fa-edit" style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                    </li>
+
+                    {% endif %}
+
+                    {% if priority == '1' %}
+                    <li>
+                        <a href="/priority/" style="font-size: 20px;"><i class="fa fa-fw fa-file" style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper"  style="margin-top: 60px;">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-xs-12">
+                                <div class="home_banner center_content text-center">
+                                    <h1 class="post-title">酒井名人堂</h1>
+                                </div>                               
+
+                                    <div id="hall_of_fame_shouye" style="margin-top: 30px;">
+                                      <div class="bs-example" data-example-id="split-button-dropdown">
+                                        <div class="col-xs-5" style="padding-left:0px;">
+                                                <input type="text" class="form-control" placeholder="按姓名查找" id="searchname">
+                                        </div>
+                                        <div class="btn-group">
+                                          <button type="button" class="btn btn-primary" id="search_by_item">按项目查找</button>
+                                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                            <li><a href="#">长跑</a></li>
+                                            <li><a href="#">篮球</a></li>
+                                            <li><a href="#">跳远</a></li>
+                                            <li><a href="#">足球</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            
+                                          </ul>
+                                        </div>
+                                        <div class="btn-group" style="margin-left:11px;">
+                                            <button type="button" class="btn btn-primary" id="searchperson-btn">搜索</button>
+                                        </div>
+                                      </div>
+
+                                    </div>
+									{% for years in info %}
+									<div class="panel panel-default" id="year-panel{{years.year}}" style="margin-top: 30px;">
+										<div class="panel-heading" >
+                                            <h3 style="margin-bottom:5px;"><span id="year{{years.year}}">{{years.year}}</span  >
+												{% if priority != '3' %}
+                                                <button style="float:right;" href="#" type="button" class="btn btn-danger year-delete-btn" id="delete{{years.year}}" >删除年份</button>
+												{% endif %}
+                                            </h3>
+										</div>
+									{% for person in years.persons %}
+                                    <div class="panel-body"  id="person-panel{{ person.name }}">
+                                        <div class="col-xs-4">
+                                            <a>
+												<img src="/static/images/{{person.image}}" class="img-responsive" alt="Responsive image" width="100%" height="100%">
+											</a>
+                                        </div>
+                                        <form action="hall_of_fame/personinfo" method="post">
+                                        <div class="col-xs-6">
+                                            <p>姓名：<span id="name{{person.name}}" name="show_name">{{person.name}}</span>
+												<br><br>
+                                            	擅长项目：{{person.strength}}
+												<br><br>
+                                            	个人简介：{{person.introduction}}
+                                        </div>
+                                        </form>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success showinfo-btn" id="showinfo{{person.name}}">查看详情</button>
+                                            {% if priority != '3' %}
+                                            <button href="#" type="button" class="btn btn-danger delete-btn" id="delete{{person.name}}" >删除名人</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+									{% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    {% if priority != '3' %}
+                                    <button href="#" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal_add_year" style="margin-top: 10px;">添加年份</button>                                    
+									<button href="#" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="margin-left: 15px; margin-top: 10px;">添加名人</button>
+                                    {% endif %}
+
+									<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4 class="modal-title" id="myModalLabel">添加酒井名人堂名人</h4>
+												</div>
+												<div class="modal-body">
+													<form class="form-horizontal" role="form">
+														  <div class="form-group">
+																<label for="firstname" class="col-sm-2 control-label">上传头像</label>
+																<input class="col-sm-8" type="file" id="image" alt="上传头像" onchange="Javascript:validate_img(this);">
+														  </div>
+														  <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>姓名</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="name" placeholder="请输入姓名">
+															</div>
+														  </div>
+														  <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>入选年份</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="year" placeholder="请输入年份">
+															</div>
+														  </div>
+                                                          <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>擅长项目</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="strength" placeholder="请输入项目">
+															</div>
+														  </div>
+														  <div class="form-group">
+															<label for="introduction" class="col-sm-2 control-label" >个人简介</label>
+															<div class="col-sm-9">
+																<textarea class="form-control" rows="4" id="introduction"></textarea>
+															</div>
+														  </div>
+													</form>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+														<button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+													</div>
+													<div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+												</div>											
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+                                    
+                                    <div class="modal fade" id="myModal_add_year" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4 class="modal-title" id="myModalLabel_year">添加酒井名人堂年份</h4>
+												</div>
+												<div class="modal-body">
+													<form class="form-horizontal" role="form">
+														  <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>添加年份</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="year_add" placeholder="请输入年份">
+															</div>
+														  </div>
+													</form>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+														<button type="button" class="btn btn-primary" id="year-submit-btn">提交</button>
+													</div>
+													<div class="error_message_2 col-lg-offset-2" style="display: none; color: #f00;"></div>
+												</div>											
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                     </div>
+                    <footer><p><a href=""></a></p></footer>
+                </div>
+            </div>
+        </div>
+        </div>
+    <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.metisMenu.js"></script>
+    <script src="/static/js/custom-scripts.js"></script>
+		
+	<script type="text/javascript">          
+        $("#searchmatch-btn").click(function(){
+            name = $("#smatchname").val();
+            if (name == ""){
+                alert("搜索赛事不能为空");
+                return;
+            }
+            var sForm = document.createElement("form");
+            document.body.appendChild(sForm);
+            sForm.method = 'get';
+            sForm.action = '/search';
+            var newElement2 = document.createElement("input");
+            newElement2.setAttribute("name","searchname");
+            newElement2.setAttribute("type","searchbyname");
+            newElement2.setAttribute("value",name);
+            sForm.appendChild(newElement2);
+            sForm.submit();
+        });
+        
+        $("#year-submit-btn").click(function() {
+			$('.error_message_2').hide();
+            var formData = new FormData();
+            year = $("#year_add").val();
+
+			if (isNaN(year) || year < 2015) {
+				$('.error_message').show().text("请填写正确年份");
+				return;
+			}
+            formData.append('type','add_year');
+            formData.append('year',year);
+            $.ajax({
+                url: '/index/hall_of_fame',
+                type: 'POST',
+                datatype: 'json',
+                data: formData,
+                cache:false,
+                traditional: true,
+                contentType: false,
+                processData: false,
+                success: function (data) {				
+                    if (data.message == 'ok') {
+                        alert("添加年份成功！");
+                        setTimeout(function(){
+                            location.href = '/index/hall_of_fame';
+                        },500);            
+                    } 
+                    if (data.message == 'used') {
+                        alert("该年份已存在，请重新确认或更换年份！");
+				}},
+                error: function () {}
+              });
+		});
+        
+        $("#submit-btn").click(function() {
+			$('.error_message').hide();
+            var formData = new FormData();
+            formData.append('image',$("#image").get(0).files[0]);
+			name = $("#name").val();
+			year = $("#year").val();
+            strength = $("#strength").val();
+			introduction = $("#introduction").val();
+            if ($("#image").get(0).files[0] == null){
+                $('.error_message').show().text("请上传头像");
+				return;
+            }
+			if ( name == "" || year == "" || strength == "") {
+				$('.error_message').show().text("请补全名人信息");
+				return;
+			}
+			if (isNaN(year) || year < 2016) {
+				$('.error_message').show().text("请填写正确年份");
+				return;
+			}
+            
+            formData.append('type','submit');
+            formData.append('name',name);
+            formData.append('year',year);
+            formData.append('introduction',introduction);
+            formData.append('strength',strength);
+            
+            $.ajax({
+                url: '/index/hall_of_fame',
+                type: 'POST',
+                datatype: 'json',
+                data: formData,
+                cache:false,
+                traditional: true,
+                contentType: false,
+                processData: false,
+                success: function (data) {				
+                    if (data.message == 'ok') {
+                        alert("添加名人成功！");
+                        setTimeout(function(){
+                            location.href = '/index/hall_of_fame';
+                        },500);            
+                    } 
+                    if (data.message == 'used') {
+                        alert("该名人已存在，请重新确认或更换名人！");
+				}},
+                error: function () {}
+              });
+		});
+        
+        $(".year-delete-btn").click(function() {
+        year = $("#" + this.id.replace('delete','year')).text();
+        panel = "#" + this.id.replace('delete','year-panel');
+        if (confirm("确定要删除" + year + "年吗？")) {
+            $.post('', {
+                'type':'delete_year',
+                'year':year,
+                }, function (data) {
+                    if (data.message == 'ok') {
+                        $(panel).hide("slow");
+                    } 
+                });
+            }
+        });
+        
+		$(".delete-btn").click(function() {
+        name = $("#" + this.id.replace('delete','name')).text();
+        panel = "#" + this.id.replace('delete','person-panel');
+        if (confirm("确定要删除名人--" + name + "吗？")) {
+            $.post('', {
+                'type':'delete',
+                'name':name,
+                }, function (data) {
+                    if (data.message == 'ok') {
+                        $(panel).hide("slow");
+                    } 
+                });
+            }
+        });
+        
+        $(".showinfo-btn").click(function() {
+            name = $("#" + this.id.replace('showinfo','name')).text();
+            var turnForm = document.createElement("form");   
+            document.body.appendChild(turnForm);
+            turnForm.method = 'get';
+            turnForm.action = 'hall_of_fame/personinfo';
+            var newElement = document.createElement("input");
+            newElement.setAttribute("name","showname");
+            newElement.setAttribute("type","hidden");
+            newElement.setAttribute("value",name);
+            turnForm.appendChild(newElement);
+            turnForm.submit();
+        });
+
+        $("#searchperson-btn").click(function() {
+            name = $("#searchname").val();
+            if (name == ""){
+                alert("搜索内容不能为空");
+                return;
+            }
+            var turnForm2 = document.createElement("form");   
+            document.body.appendChild(turnForm2);
+            turnForm2.method = 'get';
+            turnForm2.action = 'hall_of_fame';
+            var newElement2 = document.createElement("input");
+            newElement2.setAttribute("name","searchname");
+            newElement2.setAttribute("type","searchbyname");
+            newElement2.setAttribute("value",name);
+            turnForm2.appendChild(newElement2);
+            turnForm2.submit();
+        });     
+        
+        function validate_img(img){
+            var file = img.value;  
+            if(((img.files[0].size).toFixed(2))>=(2*1024*1024)){        
+                    alert("请上传小于2M的图片");
+                    $("#picture").val("");
+                    return false;
+                }
+            if(!/.(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(file)){      
+                alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+                $("#picture").val("");
+                return false;
+            }else{
+                if(((img.files[0].size).toFixed(2))>=(2*1024*1024)){        
+                    alert("请上传小于2M的图片");
+                    $("#picture").val("");
+                    return false;
+                }
+            }
+        };
+	</script>
+</body>
+</html>
+		

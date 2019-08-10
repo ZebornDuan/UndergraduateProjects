@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BootstrapValidator demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+</head>
+<body>
+
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h3 class="modal-title">欢迎使用计算机系赛事报名系统</h3>
+                <h4 class="modal-title" id="myModalLabel">请完善个人信息</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="container">
+                    <div class="row">
+                        <!-- form: -->
+                        <section>
+                            <div class="col-lg-6">
+                                <!-- <div class="page-header">
+                                    <h2>Customizing errors</h2>
+                                </div> -->
+
+                                <form id="defaultForm" method="post" class="form-horizontal" action="">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">姓名</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="name" placeholder="name"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">班级</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="class"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">邮箱</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="email"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">性别</label>
+                                        <div class="col-lg-5">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gender" value="male"/>男
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gender" value="female"/>女
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gender" value="other"/>第三性别
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group hide">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <ul id="errors"></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <button type="submit" class="btn btn-primary">Sign up</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                        <!-- :form -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: '姓名不能为空'
+                            }
+                        }
+                    },
+                    class: {
+                        // message: 'The class is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '班级不能为空'
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 10,
+                                message: '班级格式错误'
+                            },
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱地址不能为空'
+                            },
+
+                            emailAddress: {
+                                message: '邮箱地址格式错误'
+                            }
+                        }
+                    },
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择性别'
+                            }
+                        }
+                    }
+                }
+            })
+            .on('error.field.bv', function (e, data) {
+                var messages = data.bv.getMessages(data.field);
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+                for (var i in messages) {
+                    $('<li/>').attr('data-bv-for', data.field).html(messages[i]).appendTo('#errors');
+                }
+                $('#errors').parents('.form-group').removeClass('hide');
+            })
+            .on('success.field.bv', function (e, data) {
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+            })
+            .on('success.form.bv', function (e) {
+                $('#errors')
+                    .html('')
+                    .parents('.form-group').addClass('hide');
+            });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+ #wrapper {
+    width: 100%;
+    background:#09192A;
+}
+
+#page-wrapper {
+    padding: 15px 15px;
+    /*min-height: 400px;*/
+    background:#E5EBF2;
+   
+}
+#page-inner {
+    width:100%;
+    margin:10px 20px 10px 0px;
+    background-color:transparent;
+    padding:10px;
+    min-height:1200px;
+}
+
+.text-center {
+    text-align:center;
+}
+.no-boder {
+    border:1px solid #f3f3f3;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+margin-top: 7px;
+margin-bottom: -5px;
+}
+h2 {
+    color: #000;
+}
+h4 {
+    padding-top:10px;
+}
+.square-btn-adjust {
+    border: 0px solid transparent; 
+   -webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+
+}
+p {
+    font-size:16px;
+    line-height:25px;
+    padding-top:20px;
+}
+
+.page-header {
+padding-bottom: 9px;
+margin: 10px 0;
+border-bottom: 1px solid #C7D1DD;
+}
+
+
+footer p{
+font-size: 14px;
+}
+
+.user-image {
+    margin: 25px auto;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+max-height:170px;
+max-width:170px;
+}
+.top-navbar{
+margin:0px;
+}
+.top-navbar .navbar-brand {
+color: #fff;
+width: 200px;
+text-align: left;
+height: 60px;
+font-size: 25px;
+font-weight: 700;
+text-transform: uppercase;
+line-height: 30px;
+}
+.top-navbar .nav > li {
+position: relative;
+display: inline-block;
+}
+.top-navbar .nav > li > a {
+position: relative;
+display: block;
+padding: 19px 15px;
+color: #77C0FD;
+}
+.top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
+text-decoration: none;
+background-color: #225081;
+color: #fff;
+}
+.top-navbar .dropdown-menu{
+min-width: 230px;
+border-radius: 0 0 4px 4px;
+}
+.top-navbar .dropdown-menu > li > a:hover, .top-navbar .dropdown-menu > li > a:focus{
+color: #225081;
+background:none;
+}
+.dropdown-tasks{
+width: 255px;
+}
+.dropdown-tasks .progress {
+height: 8px;
+margin-bottom: 8px;
+overflow: hidden;
+background-color: #f5f5f5;
+border-radius: 0px;
+}
+.dropdown-tasks > li > a { 
+padding: 0px 15px;
+}
+.dropdown-tasks p {
+font-size: 13px;
+line-height: 21px;
+padding-top: 4px;
+}
+.active-menu {
+    background-color:#225081!important;
+}
+
+.active-nav {
+    color:#0044cc !important;
+}
+
+.arrow {
+    float: right;
+}
+
+.fa.arrow:before {
+    content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+    content: "\f107";
+}
+.nav-second-level li,
+.nav-third-level li {
+    border-bottom: none !important;
+}
+
+.nav-second-level li a {
+    padding-left: 37px;
+}
+
+.nav-third-level li a {
+    padding-left: 55px;
+}
+.sidebar-collapse , .sidebar-collapse .nav{
+	background:none;
+}
+.sidebar-collapse .nav {
+	padding:0;
+}
+.sidebar-collapse .nav > li > a {
+	color:#fff;
+	background:transparent;
+	text-shadow:none;
+	
+}
+.sidebar-collapse > .nav > li > a {
+	padding:15px 10px;
+}
+.sidebar-collapse > .nav > li {
+	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
+}
+ul.nav.nav-second-level.collapse.in {
+background: #172D44;
+}
+.sidebar-collapse .nav > li > a:hover,
+.sidebar-collapse .nav > li > a:focus {
+	 
+	outline:0;
+}
+ 
+.navbar-side {
+		border:none;
+		background-color: transparent;
+    margin-top: 120px;
+}
+
+
+.top-navbar {
+	background:#09192A;
+	border-bottom:none;
+	
+}
+.top-navbar .nav > li > a > i {
+margin-right: 2px;
+}
+.top-navbar .navbar-brand:hover { 
+color:#fff;
+
+}
+.dropdown-user li {
+margin: 8px 0;
+}
+.navbar-default {
+border:0px solid black;
+     
+}
+.navbar-header {
+    background: #09192A;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+background-color: #B40101;
+}
+.navbar-default .navbar-toggle {
+border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #FFF;
+}
+.nav > li > a > i {
+    margin-right:10px;
+}
+
+@media(min-width:768px) {
+     #page-wrapper{
+        margin: 0 0 0 200px;
+        padding: 15px 30px;
+        /*min-height: 1200px;	*/
+    }
+    .navbar-side {
+        z-index: 1;
+        position: fixed;
+        width: 200px;
+        margin-top: 0;
+    }
+
+   .navbar {
+ border-radius: 0px; 
+}
+   
+}
+ @media(max-width:480px) {
+.page-header small {
+display: block;
+padding-top: 14px;
+font-size: 19px;
+}
+
+.navbar-side {
+    margin-top: 120px;
+}
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#add-btn {
+	-webkit-appearance: none;background: #36a803;
+	border: none;border-radius: 2px;
+	color: #fff;cursor: pointer;height: 30px;
+	font-family: 'Open Sans', sans-serif; 
+	font-size: 1.2em;letter-spacing: 0.05em;
+	text-align: center;
+	text-transform: uppercase;
+	transition: background 0.3s ease-in-out;
+	width: 100px;
+	padding: 0 10px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+#give-btn {
+	-webkit-appearance: none;
+	background: #36a803;
+	border: none;border-radius: 2px;
+	color: #fff;cursor: pointer;
+	height: 30px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.2em;
+	letter-spacing: 0.05em;
+	text-align: center;
+	text-transform: uppercase;
+	transition: background 0.3s ease-in-out;
+	width: 100px;
+	padding: 0 10px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+#match-table {
+	margin-left:15px;
+	margin-right:15px;
+	width: 95%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+/*分割线*/
+.line{
+    height: 1px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 95%;
+	max-width: 100%;
+}
+.line span{
+    position: relative;
+    top: -8px;
+    background: #fff;
+    padding: 0 20px;
+}
+
+/* 报名表朝向 */
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+	text-align: left;
+}
+
+/* 轮播图 */
+
+.carousel-inner {
+	height: 600px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+}
+.carousel-inner > .item {
+	height: 600px;
+	overflow:hidden;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	width: 100%;
+  	max-height: 600px;
+	height: 100%
+}
+.carousel-control {
+	top: /*225px;*/  300px;
+	left: -1px;
+	width: 34px;
+	height: 61px;
+	background-position: -34px 0;
+}
+.carousel-control.left,
+.carousel-control.right{
+    background-image:url(/static/images/post_image_controls.png);
+    background-position: -34px 0px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    filter:none;
+}
+.carousel-control.right {
+	 left:auto;
+    right: -1px;
+    background-position: 0 0;
+}
+.carousel-indicators {display: none;}

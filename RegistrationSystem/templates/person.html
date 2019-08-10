@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/custom-styles.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link href="/static/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/success/"><i class="fa fa-user-o" style="margin-right: 20px;"></i><strong>{{ username }}</strong></a>
+
+            </div>
+
+            <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search" style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+                </div>
+            </form>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw" {% if new == 1 %}style="color: #ff5555"{% endif %}></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        {% if new == 1 %}
+                    <li>
+                        <a href="/person/">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i>新消息
+                            </div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="/person/">
+                                <strong>查看所有消息</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+
+                        <li><a href="/"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="/success/" style="font-size: 20px;"><i class="fa fa-user-circle" style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                    </li>
+                    <li>
+                        <a href="/nine/" style="font-size: 20px;"><i class="fa fa-flag" style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                    </li>
+                    <li>
+                        <a href="/index/" style="font-size: 20px;"><i class="fa fa-send" style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                    </li>
+                    <li>
+                        <a href="/index/hall_of_fame" style="font-size: 20px;"><i class="fa fa-qrcode"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                    </li>
+                    <li>
+                        <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" 
+                                                                style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                    </li>
+                    <li>
+                        <a href="/person/" class="active-menu"  style="font-size: 20px;"><i class="fa fa-table"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>个人风采</a>
+                    </li>
+                    {% if priority != '3' %}
+                <li>
+                    <a href="/setting/" style="font-size: 20px;"><i class="fa fa-edit" style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                </li>
+
+                {% endif %}
+
+                {% if priority == '1' %}
+                <li>
+                    <a href="/priority/" style="font-size: 20px;"><i class="fa fa-fw fa-file" style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" style="margin-top: 60px;">
+    		<div id="page-inner">
+
+                {% if new == 1 %}
+                    <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                 新消息
+                </div>
+                            <div class="panel-body">
+                                {% for i in msg %}
+                                    {% if i.type == 'add' %}
+                                    <div class="alert alert-success">
+                                        <strong>通知</strong>：你报名的赛事<strong>{{ i.name }}</strong>已经通过审核 祝您取得优异成绩
+                                    </div>
+                                    {% endif %}
+                                    {% if i.type == 'drop' %}
+                                        <div class="alert alert-danger">
+                                            <strong>通知</strong>：你报名的赛事<strong>{{ i.name }}</strong>已经由队长取消报名
+                                        </div>
+                                    {% endif %}
+                                    {% if i.type == 'refuse' %}
+                                        <div class="alert alert-danger">
+                                            <strong>通知</strong>：你报名的赛事<strong>{{ i.name }}</strong>被管理员拒绝
+                                        </div>
+                                    {% endif %}
+                                    {% if i.type == 'grades' %}
+                                        <div class="alert alert-danger">
+                                            <strong>通知</strong>：你参加的赛事<strong>{{ i.name }}</strong>成绩已经添加
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                </div>
+            </div>                      
+                
+                {% endif %}
+
+    			<div class="row">
+    				<div class="panel panel-default">
+                        <div class="panel-heading">
+                            我的参与
+                        </div>
+                        <div class="panel-body" >
+                            <div class="table-responsive" style="overflow-x: hidden;">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>赛事</th>
+                                            <th>时间</th>
+                                            <th>地点</th>
+                                            <th>成绩</th>
+                                            <th>名次</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for match in finish %}
+                                        <tr>
+                                            <td>{{ match.No }}</td>
+                                            <td>{{ match.name }}</td>
+                                            <td>{{ match.time }}</td>
+                                            <td>{{ match.address }}</td>
+                                            <td>{{ match.grades }}</td>
+                                            <td>{{ match.no }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+    					
+    			</div>
+    				<footer><p><a href=""></a></p></footer>
+    		</div>
+	    </div>
+    </div>
+
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="/static/js/jquery.metisMenu.js"></script>
+    
+    <script src="/static/js/dataTables/jquery.dataTables.js"></script>
+    <script src="/static/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
+
+    <script src="/static/js/custom-scripts.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/custom-styles.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css">
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/success/"><i class="fa fa-user-o"
+                                               style="margin-right: 20px;"></i><strong>{{ username }}</strong></a>
+        </div>
+
+        <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search"
+              style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+                </div>
+            </div>
+        </form>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw" {% if new == 1 %}style="color: #ff5555"{% endif %}></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    {% if new == 1 %}
+                    <li>
+                        <a href="/person/">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i>新消息
+                            </div>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="/person/">
+                            <strong>查看所有消息</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+
+                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="/success/" style="font-size: 20px;  text-align : left;"><i class="fa fa-user-circle"
+                                                                    style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                </li>
+                <li>
+                    <a href="/nine/" style="font-size: 20px; text-align : left;"><i class="fa fa-flag"
+                                                           style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                </li>
+                <li>
+                    <a href="/index/" style="font-size: 20px; text-align : left;"><i class="fa fa-send"
+                                                                               style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                </li>
+                <li>
+                    <a href="/index/hall_of_fame" style="font-size: 20px;  text-align : left;"><i class="fa fa-qrcode"
+                                                           style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                </li>
+                <li style="text-align: left;">
+                    <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                </li>
+                <li>
+                    <a href="/person/" style="font-size: 20px;  text-align : left;"><i class="fa fa-table" style="margin-right: 26.5px;font-size: 30px;"></i>个人风采</a>
+                </li>
+                {% if priority != '3' %}
+                <li>
+                    <a href="/setting/" class="active-menu" style="font-size: 20px;  text-align : left;"><i class="fa fa-edit" style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                </li>
+
+                {% endif %}
+
+                {% if priority == '1' %}
+                <li>
+                    <a href="/priority/" style="font-size: 20px;  text-align : left;"><i class="fa fa-fw fa-file" style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" style="margin-top: 60px;">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h3>首页轮播图片<a class="btn btn-warning" style="float: right; padding: 0 5px;" data-toggle="modal" data-target="#edit-match">编辑</a></h3>
+                    </div>
+                   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" role='listbox'>
+                            {% for image in images %}
+                                <div class="item {% if image.which == 1 %}active{% endif %}">
+                                <img src="/static/images/{{ image.name }}" >
+                                <div class="carousel-caption">
+                                    <h1>{{ image.title }}</h1>
+                                    <p>{{ image.description }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>-->
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>-->
+                        </a>
+                    </div>
+                </div>
+
+<div class="container col-md-12" id="container-produce">
+    <div class="row" id="threecols">
+        <div class="col-md-4">
+            <img src="/static/images/{{ image1.name }}"
+                 class="img-circle">
+            <h1>{{ image1.title }}</h1>
+            <p>{{ image1.description }}</p>
+            <a class="btn btn-default update-btn" id="1">更新</a>
+        </div>
+        <div class="col-md-4">
+            <img src="/static/images/{{ image2.name }}" alt="scenery2"
+                 class="img-circle">
+            <h1>{{ image2.title }}</h1>
+            <p>{{ image2.description }}</p>
+            <a type="button" class="btn btn-default update-btn" id="2">更新</a>
+        </div>
+        <div class="col-md-4">
+            <img src="/static/images/{{ image3.name }}" alt="scenery3"
+                 class="img-circle">
+            <h1>{{ image3.title }}</h1>
+            <p>{{ image3.description }}</p>
+            <a type="button" class="btn btn-default update-btn" id="3">更新</a>
+        </div>
+    </div>
+</div>
+            </div>
+            <footer><p><a href=""></a></p></footer>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="edit-match" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">更改图片</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="file-form" method="post" class="form-horizontal" style="margin-top: 10px;" accept="/index" enctype="multipart/form-data">
+                        <form id="defaultForm" class="form-horizontal">
+                                    <input type="text" name="type" value="file" style="display: none;" />
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">图片名称</label>
+                                        <div class="row">
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="title" />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="file" id="picture" name="image" onchange="Javascript:validate_img(this, "#picture");" />
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">图片位置</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="which">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                            <label class="col-lg-2 control-label">图片描述</label>
+                                            <div class="col-lg-8">
+                                                <textarea rows="3" cols="50" style="resize: none;" name="description"></textarea>
+                                            </div>
+                                    </div>
+
+                                    <div class="form-group hide">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <ul id="errors"></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-2">
+                                            <input type="button" value="提交" id="edit-btn" style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                        </div>
+
+                                    </div>
+                                    <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                        </form>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="update" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-bottom: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li><a style="font-size: 20px; color: #FF0000;">更新页面</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form id="update-form" method="post" class="form-horizontal" style="margin-top: 10px;" accept="/index" enctype="multipart/form-data">
+                        <form id="defaultForm" class="form-horizontal">
+                                    <input type="text" name="which" style="display: none;" id="input-which" />
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">图片标题</label>
+                                        <div class="row">
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" id="title-image" name="title"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="file" id="picture-bottom" name="image" onchange="Javascript:validate_img(this, "#picture-bottom");" />
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                            <label class="col-lg-2 control-label">图片描述</label>
+                                            <div class="col-lg-8">
+                                                <textarea rows="3" cols="50" style="resize: none;" name="description" id="description-image"></textarea>
+                                            </div>
+                                    </div>
+
+                                    <div class="form-group hide">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <ul id="errors"></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-2">
+                                            <input type="button" value="提交" id="btn-update" style="-webkit-appearance: none;background: #36a803;border: none;border-radius: 2px;color: #fff;cursor: pointer;height: 30px;font-family: 'Open Sans', sans-serif;font-size: 1.2em;letter-spacing: 0.05em;text-align: center;text-transform: uppercase;transition: background 0.3s ease-in-out;width: 50px;padding: 0 10px;font-weight: bold;">
+                                        </div>
+
+                                    </div>
+                                    <div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+                        </form>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script src="/static/js/jquery.metisMenu.js"></script>
+<script src="/static/js/custom-scripts.js"></script>
+
+<script type="text/javascript">
+    $(".update-btn").click(function () {
+        id = this.id;
+        $("#input-which").val(id);
+        $("#update").modal("show");
+    });
+
+    $("#btn-update").click(function () {
+        $('.error_message').hide();
+        if ($("#picture-bottom").val() == "") {
+            $('.error_message').show().text("请选择一张图片！");
+            setTimeout(function () {
+                $('.error_message').hide();
+            }, 500);
+            return;
+        }
+
+        if ($("#description-image").val() == "" || $("#title-image").val() == "") {
+            $('.error_message').show().text("请添加标题与描述");
+            setTimeout(function () {
+                $('.error_message').hide("slow");
+            }, 1000);
+            return;
+        }
+
+        $("#update-form").submit();
+    });
+
+    $("#edit-btn").click(function () {
+    if ($("#picture").val() == "") {
+        $('.error_message').show().text("请选择一张图片！");
+        setTimeout(function () {
+            $('.error_message').hide("slow");
+        }, 1000);
+        return;
+    }
+    $("#file-form").submit();
+});
+
+function validate_img(img) {
+    var file = img.value;
+    if (((img.files[0].size).toFixed(2)) >= (2 * 1024 * 1024)) {
+        alert("请上传小于2M的图片");
+        $("#picture").val("");
+        return false;
+    }
+    if (!/.(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(file)) {
+        alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+        $("#picture").val("");
+        return false;
+    } else {
+        if (((img.files[0].size).toFixed(2)) >= (2 * 1024 * 1024)) {
+            alert("请上传小于2M的图片");
+            $("#picture").val("");
+            return false;
+        }
+    }
+};
+</script>
+
+</body>
+</html>

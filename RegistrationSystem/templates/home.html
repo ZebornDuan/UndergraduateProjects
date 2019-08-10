@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">	
+	<link rel="stylesheet" type="text/css" href="/static/css/app.css">
+	<title>计算机系赛事报名系统</title>
+</head>
+	
+<body>
+<nav class="navbar navbar-fixed-top my-navbar" role="navigation" style="margin-bottom: 0">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+									data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">计算机系体育赛事报名系统</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+					<li id="signin-button" data-toggle="modal" data-target="#signin-signup-tab"><a href="#">登录</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+	
+<div class="bg">
+	<div class="bg-inner"> 
+	<div class="slide-inner" id="title-inner">
+		<div class="contain">
+			<h1 class="maintitle">酒 井 人<br>键 盘 外 的 赛 场</h1>
+			<br><br>
+			<p class="subtitle">在这里你可以掌握第一手贵系马杯赛事,酒井赛事的前沿资讯.可以更加深入地了解贵系的体育大佬.赶快登录吧</p>
+			<br>
+		</div>
+		<a href="#" role="tab" data-toggle="modal" id="login-tab" data-target="#signin-signup-tab"><input type="button" class="button" id="login-button" value="登录"></a>
+	</div>
+	</div>
+</div>  
+ 
+<div class="bg-1">
+	<div class="bg-inner-1">
+	<div class="col-sm-3 div-inline col-sm-offset-1" >
+			<h2 class="main-title" style="margin-top: 240px">赛事精彩速递</h2>	
+			<p class="sub-title" style="margin-top: 30px">这里有你每周都不能错过的体育赛事的精彩瞬间</p>
+	</div>
+	<div class="col-sm-7 div-inline col-sm-offset-1">
+		<!-- Image Slider -->
+		<div class="widget-container widget_gallery boxed boxed-cream">
+			<div class="inner">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner" role='listbox'>
+						{% for image in images %}
+							<div class="item {% if image.which == 1 %}active{% endif %}">
+								<img src="/static/images/{{ image.name }}" >
+								<div class="carousel-caption">
+									<h1>{{ image.title }}</h1>
+									<p>{{ image.description }}</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+							<!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>-->
+					</a>
+					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+							<!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>-->
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+	
+<div class="bg-2">
+	<div class="bg-inner-2">
+	<div class="container container-1" id="container-produce">
+		<div class="col-md-12">
+			<h2 class="main-title-1">酒井名人堂</h2>
+			<p class="line line-big"></p>	
+			<br>
+			<div class="row" id="threecols">				
+				<div class="col-md-4">
+					<img src="/static/images/{{ image1.name }}"
+							 class="img-circle">
+					<h1>{{ image1.title }}</h1>
+					<p>{{ image1.description }}</p>
+					<!-- <a type="button" class="btn btn-default update-btn" id="1">更新</a> -->
+				</div>
+				<div class="col-md-4">
+					<img src="/static/images/{{ image2.name }}" alt="scenery2"
+							 class="img-circle">
+					<h1>{{ image2.title }}</h1>
+					<p>{{ image2.description }}</p>
+					<!-- <a type="button" class="btn btn-default update-btn" id="2">更新</a> -->
+				</div>
+				<div class="col-md-4">
+					<img src="/static/images/{{ image3.name }}" alt="scenery3"
+							 class="img-circle">
+					<h1>{{ image3.title }}</h1>
+					<p>{{ image3.description }}</p>
+					<!-- <a type="button" class="btn btn-default update-btn" id="3">更新</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+	
+<div id="signin-signup-tab" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content"  id="content-sign">
+            <div class="modal-body" style="padding: 30px 30px 0px 30px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fafafa">x</button>
+                <ul class="nav nav-tabs" role="tablist" >
+                    <li id="signin-li"><a href="#signin-tab" role="tab" data-toggle="tab" id="login-tab">登录</a></li>
+                    <li id="signin-li"><a href="https://accounts.net9.org/register" target="_blank" id="register-tab">注册</a></li>
+                </ul>
+                <div class="tab-content" id="signin-signup-tab">
+                    <div class="tab-pane" id="signin-tab">
+                        <form method="post" class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" placeholder="请输入Accounts9账号" id="account" autocomplete="off" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg" placeholder="请输入登录密码" id="pass" autocomplete="off" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="button" class="button" id="check_button" title="Sign In" value="登录">
+                                <span><a href="https://accounts.net9.org/login/fetchpwd" target="_blank">忘记密码</a></span>
+                                <div class="error_message"></div>
+                            </div>
+                        </form>	
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+	
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#signin-button').click(function () {
+            $('#signin-li').addClass('active');
+            $('#signin-tab').addClass('active');
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#login-button').click(function () {
+            $('#signin-li').addClass('active');
+            $('#signin-tab').addClass('active');
+        });
+    });
+</script>	
+<script>  
+	$(window).scroll(function () {  
+			if ($(".navbar").offset().top > 50) {$(".navbar-fixed-top").addClass("top-nav");  
+			}else {$(".navbar-fixed-top").removeClass("top-nav");}  
+	})
+</script> 
+
+
+<script type="text/javascript">
+	$('#check_button').click(function () {
+		$('.error_message').hide();
+		account = $('#account').val();
+		password = $('#pass').val();
+		if(account == '' || password == '') {
+			$('.error_message').show().text('请输入账号和密码╮(๑•́ ₃•̀๑)╭');
+			return;
+		}
+
+		$.post('', {
+			'username':account,
+			'password':password,
+		}, function (data) {
+			if (data.message == 'ok') {
+				location.href = '/success/';
+			} else {
+                if (data.message == 'no')
+				    $('.error_message').show().text('用户名不存在！╮(๑•́ ₃•̀๑)╭');
+                else {
+                    if (data.message == 'wrong')
+                        $('.error_message').show().text('密码错误！╮(๑•́ ₃•̀๑)╭');
+                    else
+                        location.href = '/first/';
+                }
+			}
+		});
+	});
+</script>
+
+
+</body>
+</html>

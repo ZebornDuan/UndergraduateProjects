@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/dist/js/bootstrapValidator.js"></script>
+
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <!-- Bootstrap Styles-->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- FontAwesome Styles-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Styles-->
+    <link href="/static/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=""><i class="fa fa-user-o"
+                                               style="margin-right: 20px;"></i><strong>{{ username }}</strong></a>
+        </div>
+
+        <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search"
+              style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+                </div>
+            </div>
+        </form>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw" {% if new == 1 %}style="color: #ff5555"{% endif %}></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    {% if new == 1 %}
+                    <li>
+                        <a href="/person/">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i>新消息
+                            </div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="/person/">
+                            <strong>查看所有消息</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+
+                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="" style="font-size: 20px;"><i class="fa fa-user-circle" style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                </li>
+                <li>
+                    <a href="/nine/" style="font-size: 20px;"><i class="fa fa-flag" style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                </li>
+                <li>
+                    <a href="/index/" style="font-size: 20px;"><i class="fa fa-send" style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                </li>
+                <li>
+                    <a href="/index/hall_of_fame" style="font-size: 20px;"><i class="fa fa-qrcode" style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                </li>
+                <li>
+                        <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/person/" style="font-size: 20px;"><i class="fa fa-table"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>个人风采</a>
+                    </li>
+                {% if priority != '3' %}
+                <li>
+                    <a href="/setting/" style="font-size: 20px;"><i class="fa fa-edit" style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                </li>
+
+                {% endif %}
+
+                {% if priority == '1' %}
+                <li>
+                    <a href="/priority/" style="font-size: 20px;"><i class="fa fa-fw fa-file" style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" style="margin-top: 60px; overflow: auto;">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+
+
+
+    <!-- <div class="container"> -->
+        <div class="row">
+            <section>
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="page-header">
+                        <h2>计算机系赛事报名系统</h2>
+                        <h4>个人信息</h4>
+                    </div>
+                    <form id="defaultForm" method="post" class="form-horizontal" action="/success/">
+                        <form id="defaultForm" method="post" class="form-horizontal" action="">
+                                    <div class="form-group">
+
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>姓名</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="name" value="{{ name }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>学号</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="id" value="{{ studentId }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>身份证号</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" name="identity" value="{{ identity }}"/>
+                                        </div>
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>性别</label>
+                                        <div class="col-lg-5">
+                                            <div class="radio">
+                                                <label>
+                                                    {% if gender == 'male' %}
+                                                        <input type="radio" checked="checked" name="gender" value="male"/>男
+                                                    {% else %}
+                                                        <input type="radio" name="gender" value="male"/>男
+                                                    {% endif %}
+                                                </label>
+                                                <label>
+                                                    {% if gender == 'female' %}
+                                                        <input type="radio" checked="checked" name="gender" value="male"/>女
+                                                    {% else %}
+                                                        <input type="radio" name="gender" value="male"/>女
+                                                    {% endif %}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 34px;">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>生日</label>
+                                        <div class="input-group date form_date col-lg-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" style="padding-left: 15px;">
+                                            <input class="form-control" size="16" type="text" value="{{ date }}" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="{{ date }}" name="date"/><br/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>攻读学位</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="degree">
+                                                {% if degree == '本科' %}
+                                                    <option selected="selected">本科</option>
+                                                {% else %}
+                                                    <option>本科</option>
+                                                {% endif %}
+                                                {% if degree == '硕士' %}
+                                                    <option selected="selected">硕士</option>
+                                                {% else %}
+                                                    <option>硕士</option>
+                                                {% endif %}
+                                                {% if degree == '博士' %}
+                                                    <option selected="selected">博士</option>
+                                                {% else %}
+                                                    <option>博士</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+
+                                        <label class="col-lg-2 control-label">所在院系</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="major">
+                                                {% if major == '计算机科学与技术系' %}
+                                                    <option selected="selected">计算机科学与技术系</option>
+                                                {% else %}
+                                                    <option>计算机科学与技术系</option>
+                                                {% endif %}
+                                                {% if major == '其他院系' %}
+                                                    <option selected="selected">其他院系</option>
+                                                {% else %}
+                                                    <option>其他院系</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>班级</label>
+                                        <div class="col-lg-3">
+                                            <input type="text" class="form-control" name="class" value="{{ studentClass }}"/>
+                                        </div>
+
+                                        <label class="col-lg-2 control-label">衣服尺寸</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="size">
+                                                {% if size == 'XXL' %}
+                                                    <option selected="selected">XXL</option>
+                                                {% else %}
+                                                    <option>XXL</option>
+                                                {% endif %}
+                                                {% if size == 'XL' %}
+                                                    <option selected="selected">XL</option>
+                                                {% else %}
+                                                    <option>XL</option>
+                                                {% endif %}
+                                                {% if size == 'L' %}
+                                                    <option selected="selected">L</option>
+                                                {% else %}
+                                                    <option>L</option>
+                                                {% endif %}
+                                                {% if size == 'M' %}
+                                                    <option selected="selected">M</option>
+                                                {% else %}
+                                                    <option>M</option>
+                                                {% endif %}
+                                                {% if size == 'S' %}
+                                                    <option selected="selected">S</option>
+                                                {% else %}
+                                                    <option>S</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>电子邮箱</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="email" value="{{ email }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>手机号码</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="phone" value="{{ phone }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">所在宿舍</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="where" placeholder="紫荆x号楼yyyA/B" value="{{ where }}"/>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group hide">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <ul id="errors"></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                        </form>
+                    </form>
+                </div>
+            </section>
+        </div>
+    <!-- </div> -->
+
+    <script type="text/javascript">
+    $('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+</script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: '姓名不能为空'
+                            }
+                        }
+                    },
+                    class: {
+                        // message: 'The class is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '班级不能为空'
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 4,
+                                message: '班级格式错误'
+                            },
+                        }
+                    },
+                    id: {
+                        validators: {
+                            notEmpty: {
+                                message: '学号不能为空'
+                            },
+                            stringLength: {
+                                min: 10,
+                                max: 10,
+                                message: '学号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '学号只包含数字'
+                            },
+                        }
+                    },
+                    phone: {
+                        validators: {
+                            notEmpty: {
+                                message: '手机号不能为空'
+                            },
+                            stringLength: {
+                                min: 11,
+                                max: 11,
+                                message: '手机号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '手机号只包含数字'
+                            },
+                        }
+                    },
+                    identity: {
+                        validators: {
+                            notEmpty: {
+                                message: '身份证号不能为空'
+                            },
+                            stringLength: {
+                                min: 18,
+                                max: 18,
+                                message: '身份证号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9Xx]+$/,
+                                message: '学号只包含数字或字母X/x'
+                            },
+                        }
+                    },
+
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱地址不能为空'
+                            },
+
+                            emailAddress: {
+                                message: '邮箱地址格式错误'
+                            }
+                        }
+                    },
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择性别'
+                            }
+                        }
+                    }
+                }
+            })
+            .on('error.field.bv', function (e, data) {
+                var messages = data.bv.getMessages(data.field);
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+                for (var i in messages) {
+                    $('<li/>').attr('data-bv-for', data.field).html(messages[i]).appendTo('#errors');
+                }
+                $('#errors').parents('.form-group').removeClass('hide');
+            })
+            .on('success.field.bv', function (e, data) {
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+            })
+            .on('success.form.bv', function (e) {
+                $('#errors')
+                    .html('')
+                    .parents('.form-group').addClass('hide');
+            });
+    });
+</script>
+
+                </div>
+            </div>
+            <footer><p><a href=""></a></p></footer>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+<script src="/static/js/jquery.metisMenu.js"></script>
+<script src="/static/js/custom-scripts.js"></script>
+<script type="text/javascript">
+$("#searchmatch-btn").click(function(){
+    name = $("#smatchname").val();
+    if (name == ""){
+        alert("搜索赛事不能为空");
+        return;
+    }
+    var sForm = document.createElement("form");
+    document.body.appendChild(sForm);
+    sForm.method = 'get';
+    sForm.action = '/search';
+    var newElement2 = document.createElement("input");
+    newElement2.setAttribute("name","searchname");
+    newElement2.setAttribute("type","searchbyname");
+    newElement2.setAttribute("value",name);
+    sForm.appendChild(newElement2);
+    sForm.submit();
+});
+</script>
+</body>
+</html>

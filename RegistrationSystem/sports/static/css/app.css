@@ -1,0 +1,408 @@
+/*.carousel {
+    max-height:520px;
+    margin-bottom: 70px;
+}
+
+.carousel .item {
+    max-height: 500px;
+}
+
+.carousel .item img {
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+}*/
+
+html{
+	width:100%;
+	height:100%;
+} /*非常重要的样式让背景图片100%适应整个屏幕*/ 
+
+body{
+	width:100%;
+	height:100%;
+	text-align:center
+}
+
+/*-----------------------------------*/
+/* navbar */
+/*-----------------------------------*/
+.bg {
+	display: table;
+	width: 100%;
+	height: 700px;
+	padding: 0px 0;
+	text-align: center;
+	color: #fff;background: 
+	url(/static/images/bck-1.jpg) no-repeat bottom center;
+	background-color: #000;
+	background-size: cover;
+}  
+
+.bg-inner {
+	display: table;
+	width: 100%;
+	height: 700px;
+	background: rgba(0,0,0,.4);
+	background-size: cover;
+}
+
+.bg-1 {
+	display: table;
+	width: 100%;
+	height: 700px;
+	padding: 0px 0;
+	text-align: center;
+	color: #ffffff;
+	background-size: cover;
+}  
+
+.bg-inner-1 {
+	display: table;
+	width: 100%;
+	height: 700px;
+	background-size: cover;
+}
+
+.bg-2 {
+	display: table;
+	width: 100%;
+	height: 700px;
+	padding: 0px 0;
+	text-align: center;
+	color: #fff;background: 
+	url(/static/images/stars.jpg) no-repeat bottom center;
+	background-color: #000;
+	background-size: cover;
+}  
+
+.bg-inner-2 {
+	display: table;
+	width: 100%;
+	height: 700px;
+	background: rgba(0,0,0,.4);
+	background-size: cover;
+}
+
+
+.my-navbar {
+	padding:20px 0;
+	transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+}  
+.my-navbar a{
+	background:transparent !important;
+	color:#fff !important;
+}  
+.my-navbar a:hover {
+	color:#45bcf9 !important;
+	background:transparent;
+	outline:0;
+}  
+.my-navbar a {
+	transition: color 0.5s ease-in-out;
+}/*-webkit-transition ;-moz-transition*/ 
+
+.top-nav {
+	padding:0;
+	background-image:url(/static/images/bck.png);
+	background-color:#09192A;
+}  
+
+/* 登入界面输入框 */
+.center-block {
+		padding: 0;
+		margin-top: 15px;
+}
+
+/* Post Images */
+
+.carousel-inner {
+	height: 500px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+}
+.carousel-inner > .item {
+	height: 500px;
+	overflow:hidden;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	width: 100%;
+  max-height: 500px;
+	height: 100%
+}
+.carousel-control {
+	/*position: absolute;
+	top: 250px;
+	left: -25px;
+	width: 9px;
+	height: 16px;
+	margin-top: 0;
+	border: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	opacity: 1;*/
+	top: 225px;
+	left: -1px;
+	width: 34px;
+	height: 61px;
+	background-position: -34px 0;
+}
+.carousel-control.left,
+.carousel-control.right{
+    background-image:url(/static/images/post_image_controls.png);
+    background-position: -34px 0px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    filter:none;
+}
+.carousel-control.right {
+	/*right: -25px;
+	left: auto;
+	background-position: -70px -16px;*/
+	 left:auto;
+    right: -1px;
+    background-position: 0 0;
+}
+.carousel-indicators {display: none;}
+
+/*-----------------------------------*/
+/* Image Slider */
+/*-----------------------------------*/
+
+.widget_gallery{margin-bottom: 10px; padding: 0px}
+
+@media (min-width: 992px){
+    .col-sm-5 .widget_gallery {width: 374px;}
+}
+
+.widget_gallery .inner{
+	padding: 75px 0px 0px 0px;
+}
+.widget_gallery .carousel{margin-bottom: 0;}
+.widget_gallery .carousel-inner {
+		height: 450px;
+		-webkit-box-shadow: 0 0 3px #585342;
+		-moz-box-shadow: 0 0 3px #585342;
+		box-shadow: 0 0 3px #585342;
+
+}
+.widget_gallery .carousel-inner > .item{
+	height: 450px !important;
+}
+.widget_gallery .carousel-title{
+		border-radius: 0;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		background: rgba(38,30,20,0.5);
+		padding: 0 0;
+}
+.widget_gallery .carousel-title h6,
+.widget_gallery .carousel-title p{
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(32,25,24,0.86);
+    margin: 0;
+}
+.widget_gallery .carousel-title p{font-size: 11px;}
+
+.widget_gallery .carousel-control {
+	top: 225px;
+	left: -1px;
+	width: 34px;
+	height: 61px;
+	background-position: -34px 0;
+}
+.widget_gallery .carousel-control.right {
+    left:auto;
+    right: -1px;
+    background-position: 0 0;
+}
+
+.widget_gallery .carousel-indicators {
+    display: block;
+    text-align: center;
+    padding:0;
+    position: relative;
+    top: 440px;
+    right: 0;
+    height: 0;
+}
+.widget_gallery .carousel-indicators li {
+    display: inline-block;
+    float: none;
+    border: 0 none;
+    width: 16px;
+    height: 16px;
+    margin: 0 -2px;
+    background-image:url(/static/images/post_image_controls.png);
+    background-position: -70px -32px;
+    background-color: transparent;
+    cursor: pointer;
+}
+.widget_gallery .carousel-indicators .active {
+    background-position: -70px -48px;
+    background-color: transparent;
+}
+
+.slide-inner {
+		margin-top: 300px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		width: 450px;
+		height: auto;
+}
+
+.maintitle {
+		font-size: 50px;
+	
+}
+
+/* 分隔线统一样式 */
+hr{
+  margin: 40px 0;
+}
+
+/* 透明渐变 - color - transparent */
+
+hr.style-one {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* 两个底面色块  */
+.test {
+		/*background-color: #051122;*/  /* todo here */
+		padding-top: 230px;
+		padding-bottom: 230px;
+		background-color: #111000; 
+}
+
+.block-2 {
+		background-color: #060324;
+		width: 100%;
+		
+		color: #f6fdfa;
+		/*margin-top: 100px;*/
+}
+
+
+
+/* div 盒子并列显示 */
+.div-inline {
+		display: inline;
+}
+
+
+#login-button {
+		-webkit-appearance: none;
+    background: #7aafe7;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    height: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 0.3s ease-in-out;
+    width: 50%;
+    padding: 0 50px 0 50px;
+    font-weight: bold;
+}
+
+/* 主标题 */
+.main-title {
+  font-size: 43px;
+  line-height: 1.2;
+  font-weight: 900;
+  margin: 0;
+  color: #141414; 
+}
+
+.main-title-1 {
+  font-size: 43px;
+  line-height: 1.2;
+  font-weight: 900;
+  margin-top: 100px;
+  color: #f6fdfa; 
+}
+
+.sub-title {
+	font-size: 20px;
+	color: #828282;
+}
+
+
+#threecols {
+    margin-bottom: 70px;
+		margin-top: 70px;
+}
+
+#container-produce {
+    text-align: center;
+}
+
+#container-produce .col-md-4 .img-circle {
+    width: 140px;
+    height: 140px;
+    background-color: #555;
+}
+
+#signin-signup-tab {
+    margin-top: 40px;
+}
+
+#content-sign {
+		background-color: #09192A;  
+		background-image: url(/static/images/sign-bck.png);
+}
+#account {
+    background: url(/static/images/main_login_account.png) no-repeat left 50%;
+    padding: 0 0 0 50px;
+}
+
+#pass {
+    background: url(/static/images/main_login_password.png) no-repeat left 50%;
+    padding: 0 0 0 50px;
+}
+
+#account:focus {
+    background: url(/static/images/main_login_account2.png) no-repeat left 50%;
+}
+
+#pass:focus {
+    background: url(/static/images/main_login_password2.png) no-repeat left 50%;
+}
+
+.error_message {
+    color: #f00;
+    width: 200px;
+    display: none;
+}
+
+#check_button {
+    -webkit-appearance: none;
+    background: /*#ff7f00;*/ #6187c7;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    height: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 0.3s ease-in-out;
+    width: 100%;
+    padding: 0 50px 0 50px;
+    font-weight: bold;
+}

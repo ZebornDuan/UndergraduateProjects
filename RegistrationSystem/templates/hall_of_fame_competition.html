@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+	<!-- Bootstrap Styles-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <!-- FontAwesome Styles-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Styles-->
+    <link href="/static/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/success/"><i class="fa fa-user-o" style="margin-right: 20px;"></i><strong>{{username}}</strong></a>
+            </div>
+
+            <form class="navbar-form navbar-left navbar-top-links collapse navbar-collapse" role="search" style="margin-top:13px;" id="bs-example-navbar-collapse-1">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="搜索赛事..">
+                <button type="button" class="btn btn-default" id="start">Go</button>
+                </div>
+            </form>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i>新消息
+                                    <span class="pull-right text-muted small">一天前</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有消息</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" style="margin-right: 50px;"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="/success/" style="font-size: 20px;"><i class="fa fa-user-circle"
+                                                                        style="margin-right: 20px;font-size: 30px;"></i>我的信息</a>
+                    </li>
+                    <li>
+                        <a href="/nine/" style="font-size: 20px;"><i class="fa fa-flag"
+                                                               style="margin-right: 20px;font-size: 30px;"></i>酒井赛事</a>
+                    </li>
+                    <li>
+                        <a href="/index/" style="font-size: 20px;"><i class="fa fa-send"
+                                                                                   style="margin-right: 20px;font-size: 30px;"></i>马杯赛事</a>
+                    </li>
+                    <li>
+                        <a href="" class="active-menu" style="font-size: 20px;"><i class="fa fa-qrcode"
+                                                               style="margin-right: 26.5px;font-size: 30px;"></i>酒井名人堂</a>
+                    </li>
+                    <li>
+                        <a href="/team/" style="font-size: 20px;"><i class="fa fa-drivers-license-o" style="margin-right: 20px;font-size: 30px;"></i>系队之家</a>
+                    </li>
+                    <li>
+                        <a href="" style="font-size: 20px;"><i class="fa fa-table" style="margin-right: 20px;font-size: 30px;"></i>个人风采</a>
+                    </li>
+                    {% if priority != '3' %}
+                    <li>
+                        <a href="/setting/" style="font-size: 20px;"><i class="fa fa-edit" style="margin-right: 20px;font-size: 30px;"></i>首页设置</a>
+                    </li>
+
+                    {% endif %}
+
+                    {% if priority == '1' %}
+                    <li>
+                        <a href="/priority/" style="font-size: 20px;"><i class="fa fa-fw fa-file" style="margin-right: 11.4px;font-size: 30px;"></i>权限管理</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper"  style="margin-top: 60px;">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-xs-12"> 
+                                <nav class="navbar navbar-inverse" role="navigation">
+									<div class="container-fluid">
+									<div class="navbar-header">
+										<a class="navbar-brand" href="/index/hall_of_fame" style="margin-left:0px;">名人堂首页</a>
+									</div>
+									<div>
+										<ul class="nav navbar-nav">
+											<li><a href="personinfo?showname={{name}}">个人信息</a></li>
+											<li class="active"><a href="competition?showname={{name}}">比赛风采</a></li>
+											<li><a href="interview?showname={{name}}">访谈记录</a></li>
+										</ul>
+									</div>
+									</div>
+								</nav>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4><span id="person_name">{{name}}</span>的比赛风采</h4>
+									</div>                   
+                                    <div class="panel-body" id="picture-panel{{image.order}}" style="margin-top: 30px;">
+                                    <div class="row">
+                                    <div class="blog-masonry masonry-true">
+                                        {% for image in images %}
+										<div class="post-masonry col-xs-6 col-xs-6">
+                                            <a>
+                                                <img src="/static/images/{{image.address}}" class="img-responsive" alt="Responsive image" width="100%" height="100%">
+                                            </a>
+                                            <div class="post-hover text-center">
+                                                <div class="inside">
+                                                    <h4>{{image.competition_name}}<h4>
+                                                    <h5>{{image.date}}<h5>
+                                                    <h5>{{image.description}}<h5>
+                                                </div>
+                                            </div>
+                                            <span class="hidden" id="address{{image.order}}">{{image.address}}</span>
+                                            {% if priority != '3' %}
+                                            <div>
+                                                <button href="#" type="button" class="btn btn-danger delete-btn" id="delete{{image.order}}">删除照片</button>
+                                            </div><br>
+                                            {% endif %}
+                                        </div>   
+                                        {% endfor %} 
+                                        </div>
+									</div>	 
+                                    </div>                                  
+									</div>
+                                     
+								</div>
+                                {% if priority != '3' %}
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#CompetionModal" style="margin-left:15px;">添加比赛风采照片</button> 
+                                {% endif %}
+                                
+                                
+                                <div class="modal fade" id="CompetionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4 class="modal-title" id="myModalLabel">添加比赛风采照片</h4>
+												</div>
+												<div class="modal-body">
+													<form class="form-horizontal" role="form">  
+                                                          <div class="form-group">
+																<label for="firstname" class="col-sm-2 control-label">上传照片</label>
+																<input class="col-sm-8" type="file" id="image" alt="上传照片" onchange="Javascript:validate_img(this);">
+														  </div>
+														  <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>比赛时间</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="date" placeholder="格式为2017/04/08">
+															</div>
+														  </div>
+                                                          <div class="form-group">
+															<label class="col-sm-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>赛事名称</label>
+															<div class="col-sm-9">
+															  <input type="text" class="form-control" id="competition_name" placeholder="请输入赛事名称">
+															</div>
+														  </div>
+                                                          <div class="form-group">
+															<label for="description" class="col-sm-2 control-label" >比赛说明</label>
+															<div class="col-sm-9">
+																<textarea class="form-control" rows="4" id="description"></textarea>
+															</div>
+														  </div>
+													</form>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+														<button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+													</div>
+													<div class="error_message col-lg-offset-2" style="display: none; color: #f00;"></div>
+												</div>											
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+                     </div>
+                    <footer><p><a href=""></a></p></footer>
+                </div>
+            </div>
+        </div>
+        </div>
+    <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.metisMenu.js"></script>
+    <script src="/static/js/custom-scripts.js"></script>
+    
+    <script type="text/javascript">       
+        $("#submit-btn").click(function() {
+			$('.error_message').hide();
+            var formData = new FormData();
+            formData.append('image',$("#image").get(0).files[0]);
+            name = $("#person_name").text();
+			description = $("#description").val();
+            competition_name = $("#competition_name").val();
+			date = $("#date").val();
+            if ($("#image").get(0).files[0] == null){
+                $('.error_message').show().text("请上传照片");
+				return;
+            }
+			if ( date == "" || competition_name == "") {
+				$('.error_message').show().text("请补全信息");
+				return;
+			}
+            
+            formData.append('type','submit');
+            formData.append('name',name);
+            formData.append('date',date);
+            formData.append('competition_name',competition_name);
+            formData.append('description',description);
+            
+            $.ajax({
+                url: '/index/hall_of_fame/competition',
+                type: 'POST',
+                datatype: 'json',
+                data: formData,
+                cache:false,
+                traditional: true,
+                contentType: false,
+                processData: false,
+                success: function (data) {				
+                    if (data.message == 'ok') {
+                        alert("添加比赛风采照片成功！");
+                        setTimeout(function(){
+                            location.href = '/index/hall_of_fame/competition?showname='+name;
+                        },500);            
+                    } 
+                    if (data.message == 'used') {
+                        alert("该照片已存在，请重新确认或更换照片！");
+				}},
+                error: function () {}
+              });
+		});
+        
+        $(".delete-btn").click(function() {
+            address = $("#" + this.id.replace('delete','address')).text();
+            if (confirm("确定要删除此照片吗？")) {
+                $.post('', {
+                    'type':'delete',
+                    'address':address,
+                    }, function (data) {
+                        if (data.message == 'ok') {
+                            setTimeout(function(){
+                            location.href = '/index/hall_of_fame/competition?showname='+name;
+                        },500); 
+                        } 
+                    });
+                }
+        });
+        
+        function validate_img(img){
+            var file = img.value;  
+            if(((img.files[0].size).toFixed(2))>=(2*1024*1024)){        
+                    alert("请上传小于2M的图片");
+                    $("#picture").val("");
+                    return false;
+                }
+            if(!/.(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(file)){      
+                alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+                $("#picture").val("");
+                return false;
+            }else{
+                if(((img.files[0].size).toFixed(2))>=(2*1024*1024)){        
+                    alert("请上传小于2M的图片");
+                    $("#picture").val("");
+                    return false;
+                }
+            }
+        };
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人信息完善</title>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/bootstrapvalidator-0.5.3/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrapvalidator-0.5.3/dist/js/bootstrapValidator.js"></script>
+
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="page-header">
+                        <h2>欢迎使用计算机系赛事报名系统</h2>
+                        <h4>请完善个人信息</h4>
+                    </div>
+                    <form id="defaultForm" method="post" class="form-horizontal" action="/success/">
+                        <form id="defaultForm" method="post" class="form-horizontal" action="">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>姓名</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="name" value="{{ name }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>学号</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" name="id"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>身份证号</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" name="identity"/>
+                                        </div>
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>性别</label>
+                                        <div class="col-lg-5">
+                                            <div class="radio">
+                                                <label>
+                                                        <input type="radio" name="gender" value="male"/>男
+                                                </label>
+                                                <label>
+                                                        <input type="radio" name="gender" value="male"/>女
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 34px;">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>生日</label>
+                                        <div class="input-group date form_date col-lg-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" style="padding-left: 15px;">
+                                            <input class="form-control" size="16" type="text" value="{{ date }}" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="{{ date }}" name="date"/><br/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>攻读学位</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="degree">
+                                                <option>本科</option>
+                                                <option>硕士</option>
+                                                <option>博士</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="col-lg-2 control-label">所在院系</label>
+                                        <div class="col-lg-4">
+                                            <select class="form-control" name="major">
+                                                <option>计算机科学与技术系</option>
+                                                <option>其他院系</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>班级</label>
+                                        <div class="col-lg-3">
+                                            <input type="text" class="form-control" name="class"/>
+                                        </div>
+
+                                        <label class="col-lg-2 control-label">衣服尺寸</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="size">            
+                                                <option>XXL</option>
+                                                <option>XL</option>
+                                                <option>L</option>
+                                                <option>M</option>
+                                                <option>S</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr align="center" noshade style="border-top-color: #C7D1DD;">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>电子邮箱</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="email" value="{{ email }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"><span style="color: #F00;margin-right: 2px;">*</span>手机号码</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="phone" value="{{ phone }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">所在宿舍</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" name="where" placeholder="紫荆x号楼yyyA/B"/>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group hide">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <ul id="errors"></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                        </form>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    $('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: '姓名不能为空'
+                            }
+                        }
+                    },
+                    class: {
+                        // message: 'The class is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '班级不能为空'
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 4,
+                                message: '班级格式错误'
+                            },
+                        }
+                    },
+                    id: {
+                        validators: {
+                            notEmpty: {
+                                message: '学号不能为空'
+                            },
+                            stringLength: {
+                                min: 10,
+                                max: 10,
+                                message: '学号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '学号只包含数字'
+                            },
+                        }
+                    },
+                    phone: {
+                        validators: {
+                            notEmpty: {
+                                message: '手机号不能为空'
+                            },
+                            stringLength: {
+                                min: 11,
+                                max: 11,
+                                message: '手机号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]+$/,
+                                message: '手机号只包含数字'
+                            },
+                        }
+                    },
+                    identity: {
+                        validators: {
+                            notEmpty: {
+                                message: '身份证号不能为空'
+                            },
+                            stringLength: {
+                                min: 18,
+                                max: 18,
+                                message: '身份证号长度错误'
+                            },
+                            regexp: {
+                                regexp: /^[0-9Xx]+$/,
+                                message: '学号只包含数字或字母X/x'
+                            },
+                        }
+                    },
+
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱地址不能为空'
+                            },
+
+                            emailAddress: {
+                                message: '邮箱地址格式错误'
+                            }
+                        }
+                    },
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择性别'
+                            }
+                        }
+                    }
+                }
+            })
+            .on('error.field.bv', function (e, data) {
+                var messages = data.bv.getMessages(data.field);
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+                for (var i in messages) {
+                    $('<li/>').attr('data-bv-for', data.field).html(messages[i]).appendTo('#errors');
+                }
+                $('#errors').parents('.form-group').removeClass('hide');
+            })
+            .on('success.field.bv', function (e, data) {
+                $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
+            })
+            .on('success.form.bv', function (e) {
+                $('#errors')
+                    .html('')
+                    .parents('.form-group').addClass('hide');
+            });
+    });
+</script>
+</body>
+</html>
