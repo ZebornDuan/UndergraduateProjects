@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rebornduan.news.newsrd.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <EditText
+                android:id="@+id/Keyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/textfield_multiline_default_holo_dark"
+                android:hint="输入搜索关键词"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#b9b9b9"
+                android:textSize="16sp"/>
+            
+            <ImageView
+                android:id="@+id/keySearch"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_search_black"
+                android:text="搜索"/>
+
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <com.rebornduan.news.newsrd.view.DSwipeRefresh
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/NewsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.rebornduan.news.newsrd.view.DSwipeRefresh>
+</LinearLayout>
