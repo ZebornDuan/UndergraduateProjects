@@ -21,6 +21,6 @@ The news server is provided by Information Retrieval Group, Department of Comput
 ## Preview:
 
 
-![preview](https://github.com/ZebornDuan/NewsViewerAPP/blob/master/images/1_.png)
-![preview](https://github.com/ZebornDuan/NewsViewerAPP/blob/master/images/2_.png)
-![preview](https://github.com/ZebornDuan/NewsViewerAPP/blob/master/images/3.png)
+![preview](https://github.com/ZebornDuan/UndergraduateProjects/blob/master/NewsViewer/images/1_.png)
+![preview](https://github.com/ZebornDuan/UndergraduateProjects/blob/master/NewsViewer/images/2_.png)
+![preview](https://github.com/ZebornDuan/UndergraduateProjects/blob/master/NewsViewer/images/3.png)
